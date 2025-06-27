@@ -20,7 +20,7 @@ namespace CaesarApi.Services
             if (string.IsNullOrWhiteSpace(mensaje))
                 throw new System.ArgumentException("El mensaje no puede estar vacío.");
             var cifrado = _cifradoService.Cifrar(mensaje);
-            var entidad = new Mensaje { MensajeOriginal = mensaje, MensajeEncriptado = cifrado };
+            var entidad = new Mensaje { MensajeEncriptado = cifrado };
             await _repo.AddMensajeAsync(entidad);
             return cifrado;
         }

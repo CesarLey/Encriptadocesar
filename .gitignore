@@ -7,7 +7,6 @@ obj/
 appsettings.Development.json
 secrets.json
 .env
-Dockerfile
 *.log
 TestResults/
 node_modules/

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using System;
 
 public class IpRestrictionMiddleware
 {
@@ -15,6 +16,7 @@ public class IpRestrictionMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         var remoteIp = context.Connection.RemoteIpAddress?.ToString();
+        Console.WriteLine($"IP remota: {remoteIp}"); // Log para Render
         bool permitido = false;
         foreach (var ip in _allowedIps)
         {
@@ -24,12 +26,13 @@ public class IpRestrictionMiddleware
                 break;
             }
         }
-        if (!permitido)
-        {
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            await context.Response.WriteAsync("Acceso denegado: solo se permite el acceso desde la IP de la escuela o localhost.");
-            return;
-        }
+        // --- COMENTADO TEMPORALMENTE PARA VER LA IP DE RENDER ---
+        // if (!permitido)
+        // {
+        //     context.Response.StatusCode = StatusCodes.Status403Forbidden;
+        //     await context.Response.WriteAsync("Acceso denegado: solo se permite el acceso desde la IP de la escuela o localhost.");
+        //     return;
+        // }
         await _next(context);
     }
 } 

@@ -1,0 +1,18 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.db
+appsettings.Development.json
+secrets.json
+.env
+Dockerfile
+*.log
+TestResults/
+node_modules/
+.idea/
+# Otros
+*.suo
+*.userosscache
+*.sln.docstates 

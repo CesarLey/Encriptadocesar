@@ -17,6 +17,21 @@ namespace CaesarApi.Controllers
             _configuration = configuration;
         }
 
+        [HttpGet("ip")]
+        public IActionResult GetIp()
+        {
+            var remoteIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+            var forwardedFor = HttpContext.Request.Headers["X-Forwarded-For"].ToString();
+            var realIp = HttpContext.Request.Headers["X-Real-IP"].ToString();
+            
+            return Ok(new { 
+                RemoteIp = remoteIp,
+                ForwardedFor = forwardedFor,
+                RealIp = realIp,
+                UserAgent = HttpContext.Request.Headers["User-Agent"].ToString()
+            });
+        }
+
         [HttpPost("login")]
         public IActionResult Login([FromBody] Usuario usuario)
         {
